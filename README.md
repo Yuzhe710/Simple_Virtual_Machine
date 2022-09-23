@@ -7,9 +7,9 @@ A VM is a program that acts like a computer, it simulates a CPU along with a few
 VM is primarily done to make software development easier. A VM could offer a standard platform which provided portability for a program that ran on multiple computer architectures. Instead of rewriting a program in different dialects of assembly for each CPU architecture, you would only need to write the small VM program in each assembly language. Each program would then be written only once (assembled) in the VM’s assembly language. <br />
 
 ![](porting_with_vm.png)
+![](porting_without_vm.png)
 
-
-Consider compiler? Compiler VS Assembler <br />
+Consider compiler? [Compiler VS Assembler](https://byjus.com/free-ias-prep/difference-between-compiler-and-assembler/#:~:text=The%20difference%20between%20compiler%20and,in%20context%20to%20program%20execution.) <br />
 
 A compiler solves a similar problem by compiling a standard high-level language to several CPU architectures. A VM creates one standard CPU architecture which is simulated on various hardware devices. One advantage of a compiler is that it has no runtime overhead while a VM does. Even though compilers do a pretty good job, writing a new one that targets multiple platforms is very difficult, so VMs are still helpful here. In practice, VMs and compilers are mixed at various levels. <br />
 
@@ -26,4 +26,25 @@ An instruction is a command which tells the CPU to do some fundamental task, suc
 
 Each opcode represents one task that the CPU “knows” how to do. There are just 16 opcodes in LC-3, Each instruction is 16 bits long, with the left 4 bits storing the opcode. The rest of the bits are used to store the parameters. Everything the computer can calculate is some sequence of these simple instructions. <br />
 
-CISC VS RISC <br />
+[CISC VS RISC](https://cs.stanford.edu/people/eroberts/courses/soco/projects/risc/risccisc/) <br />
+
+The instruction set includes <br />
+```
+OP_BR = 0, /* branch */
+OP_ADD,    /* add */
+OP_LD,     /* load */ 
+OP_ST,     /* store */
+OP_JSR,    /* jump register */ 
+OP_AND,    /* bitwise and */
+OP_LDR,    /* load register */
+OP_STR,    /* store register */ 
+OP_RTI,    /* unused */
+OP_NOT,    /* bitwise not */ 
+OP_LDI,    /* load indirect */
+OP_STI,    /* store indirect */ 
+OP_JMP,    /* jump */ 
+OP_RES,    /* reserved (unused) */ 
+OP_LEA,    /* load effective address */ 
+OP_TRAP    /* execute trap */
+```
+
