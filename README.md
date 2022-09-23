@@ -1,5 +1,7 @@
 # Simple_Virtual_Machine
- This project builds a virtual machine which simulates LC-3, a frictional computer for educational purpose
+This project builds a virtual machine which simulates LC-3, a frictional computer for educational purpose <br />
+The instruction set architecture document of LC-3 is included as lc3-isa.pdf
+This documents has many content from Justin Meiners and Ryan Pendleton's [Write your Own Virtual Machine](https://www.jmeiners.com/lc3-vm/#includes-block-87) tutorial. Thanks to your program, I learned a lot.
 
 ## VM
 A VM is a program that acts like a computer, it simulates a CPU along with a few other hardware components, allowing it to perform arithmetic, read and write to memory, and interact with I/O devices, just like a physical computer. Most importantly, it can understand a machine language which you can use to program it. <br />
@@ -48,3 +50,23 @@ OP_LEA,    /* load effective address */
 OP_TRAP    /* execute trap */
 ```
 
+## Trap Routines
+Trap routines are a few predefined routines for performing common tasks and interacting with I/O devices. Each trap routine is assigned a trap code which identifies it (similar to an opcode). To execute one, the TRAP instruction is called with the trap code of the desired routine. <br />
+
+In the official LC-3 simulator, trap routines are written in assembly. When a trap code is called, the PC is moved to that code’s address. The CPU executes the procedure’s instructions, and when it is complete, the PC is reset to the location following the initial call. (This is why programs start at address 0x3000 instead of 0x0. The lower addresses are left empty to leave space for the trap routine code.) <br />
+
+We write trap routine in C for this VM, When a trap code is invoked, a C function will be called. When it is completed, execution will return to the instructions. <br />
+
+Even though the trap routines can be written in assembly and this is what a physical LC-3 computer would do, it isn’t the best fit for a VM. Instead of writing our own primitive I/O routines, we can take advantage of the ones available on our OS. This will make the VM run better on our computers, simplify the code, and provide a higher level of abstraction for portability. (Getting input from the keyboard is one specific example of this. The assembly version uses a loop to continuously check the keyboard for input. This consumes a lot of CPU time for nothing! Using a proper OS input function allows the program to sleep until input is received.) <br />
+
+## Loading Programs
+How do instructions get into memory in the first place? When an assembly program is converted to machine code, the result is a file containing an array of instructions and data. This can be loaded by just copying the contents right into an address in memory. <br />
+
+## Memory Mapped Registers
+Memory mapped registers are not accessible from the normal register table. Instead, a special address is reserved for them in memory. To read and write to these registers, need to read and write to their memory location. <br />
+
+LC-3 has two memory mapped registers that need to be implemented. They are the keyboard status register (KBSR) and keyboard data register (KBDR). The KBSR indicates whether a key has been pressed, and the KBDR identifies which key was pressed. <br />
+
+Although you can request keyboard input using GETC, this blocks execution until input is received. KBSR and KBDR allows you to poll the state) of the device and continue execution, so the program can stay responsive while waiting for input. <br />
+
+Memory mapped registers make memory access a bit more complicated. We can’t read and write to the memory array directly, but must instead call setter and getter functions. When memory is read from KBSR, the getter will check the keyboard and update both memory locations. <br />
