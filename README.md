@@ -72,3 +72,10 @@ LC-3 has two memory mapped registers that need to be implemented. They are the k
 Although you can request keyboard input using GETC, this blocks execution until input is received. KBSR and KBDR allows you to poll the state) of the device and continue execution, so the program can stay responsive while waiting for input. <br />
 
 Memory mapped registers make memory access a bit more complicated. We can’t read and write to the memory array directly, but must instead call setter and getter functions. When memory is read from KBSR, the getter will check the keyboard and update both memory locations. <br />
+
+## Run the VM
+To run the vm, you can recompile the source file and run it with the [2048 implemented by rpendleton](https://github.com/rpendleton/lc3-2048)
+```
+gcc vm.c -o lc3-vm
+lc3-vm /path/to/2048.obj
+```
