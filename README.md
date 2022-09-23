@@ -1,7 +1,9 @@
 # Simple_Virtual_Machine
 This project builds a virtual machine which simulates LC-3, a frictional computer for educational purpose <br />
-The instruction set architecture document of LC-3 is included as lc3-isa.pdf
-This documents has many content from Justin Meiners and Ryan Pendleton's [Write your Own Virtual Machine](https://www.jmeiners.com/lc3-vm/#includes-block-87) tutorial. Thanks to your program, I learned a lot.
+
+The instruction set architecture document of LC-3 is included as lc3-isa.pdf <br />
+
+This documents has many content from Justin Meiners and Ryan Pendleton's [Write your Own Virtual Machine](https://www.jmeiners.com/lc3-vm/#includes-block-87) tutorial. Thanks to your program, I learned a lot. <br />
 
 ## VM
 A VM is a program that acts like a computer, it simulates a CPU along with a few other hardware components, allowing it to perform arithmetic, read and write to memory, and interact with I/O devices, just like a physical computer. Most importantly, it can understand a machine language which you can use to program it. <br />
