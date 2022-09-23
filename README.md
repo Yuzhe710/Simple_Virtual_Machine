@@ -6,7 +6,7 @@ A VM is a program that acts like a computer, it simulates a CPU along with a few
 
 VM is primarily done to make software development easier. A VM could offer a standard platform which provided portability for a program that ran on multiple computer architectures. Instead of rewriting a program in different dialects of assembly for each CPU architecture, you would only need to write the small VM program in each assembly language. Each program would then be written only once (assembled) in the VM’s assembly language. <br />
 
-![](Simple_Virtual_Machine/porting_without_vm.png)
+![](porting_with_vm.png)
 
 
 Consider compiler? Compiler VS Assembler <br />
